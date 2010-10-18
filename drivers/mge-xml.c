@@ -30,10 +30,17 @@
 
 #include "netxml-ups.h"
 #include "mge-xml.h"
+<<<<<<< HEAD
 
 #ifdef WIN32
 #include "wincompat.h"
 #endif
+=======
+#ifdef WIN32
+// strtok for win32 is re-entrant
+#define strtok_r(a,b,c) strtok(a,b)
+#endif //WIN32
+>>>>>>> 9add25e... Initial commit (preliminary investigation)
 #define MGE_XML_VERSION		"MGEXML/0.22"
 #define MGE_XML_INITUPS		"/"
 #define MGE_XML_INITINFO	"/mgeups/product.xml /product.xml /ws/product.xml"

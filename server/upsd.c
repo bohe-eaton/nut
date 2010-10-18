@@ -764,6 +764,9 @@ static void mainloop(void)
 	DWORD	ret;
 	pipe_conn_t * conn;
 #endif
+#else
+	DWORD	ret;
+#endif
 
 	upstype_t	*ups;
 	nut_ctype_t		*client, *cnext;
@@ -1127,6 +1130,9 @@ int main(int argc, char **argv)
 	datapath = xstrdup(NUT_DATADIR);
 #else
 	datapath = getfullpath(PATH_SHARE);
+#else
+	datapath = xstrdup("c:");
+#endif
 
 	/* remove trailing .exe */
 	char * drv_name;
@@ -1171,7 +1177,7 @@ int main(int argc, char **argv)
 			case 'V':
 				/* do nothing - we already printed the banner */
 				exit(EXIT_SUCCESS);
-
+#ifndef WIN32
 			case 'c':
 				if (!strncmp(optarg, "reload", strlen(optarg)))
 					cmd = SIGCMD_RELOAD;
@@ -1182,7 +1188,7 @@ int main(int argc, char **argv)
 				if (cmd == 0)
 					help(progname);
 				break;
-
+#endif
 			case 'D':
 				nut_debug_level++;
 				break;

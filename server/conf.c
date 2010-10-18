@@ -70,6 +70,31 @@ static void ups_create(const char *fn, const char *name, const char *desc)
 
 	temp->next = firstups;
 	firstups = temp;
+	temp->last_ping = 0;
+	temp->last_connfail = 0;
+	temp->inforoot = NULL;
+	temp->cmdlist = NULL;
+#ifdef WIN32
+	memset(&temp->read_overlapped,0,sizeof(temp->read_overlapped));
+	memset(temp->buf,0,sizeof(temp->buf));
+	temp->read_overlapped.hEvent = CreateEvent(NULL, /*Security*/
+						FALSE, /* auto-reset*/
+						FALSE, /* initial state = non signaled */
+						NULL /* no name */);
+	if(temp->read_overlapped.hEvent == NULL ) {
+		upslogx(LOG_ERR, "Can't create event for UPS [%s]", 
+			name);
+		return;
+	}
+#endif
+
+	if (last == NULL)
+		firstups = temp;
+	else
+		last->next = temp;
+
+	temp->sock_fd = sstate_connect(temp);
+
 	num_ups++;
 }
 
@@ -102,7 +127,10 @@ static void ups_update(const char *fn, const char *name, const char *desc)
 		sstate_infofree(temp);
 		sstate_cmdfree(temp);
 		pconf_finish(&temp->sock_ctx);
+<<<<<<< HEAD
 
+=======
+>>>>>>> 9add25e... Initial commit (preliminary investigation)
 #ifndef WIN32
 		close(temp->sock_fd);
 		temp->sock_fd = -1;

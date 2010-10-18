@@ -153,7 +153,7 @@ void background(void)
 #ifdef HAVE_SETSID
 	setsid();		/* make a new session to dodge signals */
 #endif
-
+#endif
 #else /* WIN32 */
 	xbit_set(&upslog_flags, UPSLOG_SYSLOG);
 	xbit_clear(&upslog_flags, UPSLOG_STDERR);
@@ -210,11 +210,11 @@ void chroot_start(const char *path)
 {
 	if (chdir(path))
 		fatal_with_errno(EXIT_FAILURE, "chdir(%s)", path);
-
+#ifndef WIN32
 #ifndef WIN32
 	if (chroot(path))
 		fatal_with_errno(EXIT_FAILURE, "chroot(%s)", path);
-
+#endif
 #endif
 	if (chdir("/"))
 		fatal_with_errno(EXIT_FAILURE, "chdir(/)");
@@ -279,6 +279,7 @@ void writepid(const char *name)
 #ifndef WIN32
 int sendsignalfn(const char *pidfn, int sig)
 {
+#ifndef WIN32
 	char	buf[SMALLBUF];
 	FILE	*pidf;
 	int	pid, ret;
@@ -322,6 +323,7 @@ int sendsignalfn(const char *pidfn, int sig)
 	}
 
 	fclose(pidf);
+#endif
 	return 0;
 }
 #else
@@ -399,8 +401,13 @@ static void vupslog(int priority, const char *fmt, va_list va, int use_strerror)
 	ret = vsnprintf(buf, sizeof(buf), fmt, va);
 
 	if ((ret < 0) || (ret >= (int) sizeof(buf)))
+#ifndef WIN32
 		syslog(LOG_WARNING, "vupslog: vsnprintf needed more than %d bytes",
 			LARGEBUF);
+#else
+		fprintf(stderr,"vupslog: vsnprintf needed more than %d bytes",LARGEBUF);
+#endif
+	
 
 	if (use_strerror) {
 		snprintfcat(buf, sizeof(buf), ": %s", strerror(errno));
@@ -444,7 +451,11 @@ static void vupslog(int priority, const char *fmt, va_list va, int use_strerror)
 	if (xbit_test(upslog_flags, UPSLOG_STDERR))
 		fprintf(stderr, "%s\n", buf);
 	if (xbit_test(upslog_flags, UPSLOG_SYSLOG))
+#ifndef WIN32
 		syslog(priority, "%s", buf);
+#else
+		fprintf(stderr, "%s\n", buf);
+#endif
 }
 
 

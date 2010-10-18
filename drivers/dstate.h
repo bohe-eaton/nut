@@ -22,6 +22,11 @@
 #ifndef DSTATE_H_SEEN
 #define DSTATE_H_SEEN 1
 
+#ifdef WIN32
+#undef DATADIR
+#include <windows.h>
+#endif
+
 #include "state.h"
 #include "attribute.h"
 

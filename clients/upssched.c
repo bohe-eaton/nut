@@ -260,6 +260,7 @@ static void cancel_timer(const char *name, const char *cname)
 #ifndef WIN32
 static void us_serialize(int op)
 {
+#ifndef WIN32
 	static	int	pipefd[2];
 	int	ret;
 	char	ch;
@@ -284,12 +285,14 @@ static void us_serialize(int op)
 			close(pipefd[0]);
 			break;
 	}
+#endif
 }
 #endif
 
 #ifndef WIN32
 static int open_sock(void)
 {
+#ifndef WIN32
 	int	ret, fd;
 	struct	sockaddr_un	ssaddr;
 
@@ -321,6 +324,9 @@ static int open_sock(void)
 		fatal_with_errno(EXIT_FAILURE, "listen(%d, %d) failed", fd, US_LISTEN_BACKLOG);
 
 	return fd;
+#else
+	return 0;
+#endif
 }
 #else
 static HANDLE open_sock(void)
@@ -449,6 +455,7 @@ static int send_to_one(conn_t *conn, const char *fmt, ...)
 #ifndef WIN32
 static void conn_add(int sockfd)
 {
+#ifndef WIN32
 	int	acc, ret;
 	conn_t	*tmp, *last;
 	struct	sockaddr_un	saddr;
@@ -503,6 +510,7 @@ static void conn_add(int sockfd)
 	upsdebugx(3, "new connection on fd %d", acc);
 
 	pconf_init(&tmp->ctx, NULL);
+#endif
 }
 #else
 static HANDLE conn_add(HANDLE sockfd)
@@ -695,7 +703,7 @@ static void start_daemon(int lockfd)
 	conn_t	*tmp, *tmpnext;
 
 	us_serialize(SERIALIZE_INIT);
-
+#ifndef WIN32
 	if ((pid = fork()) < 0)
 		fatal_with_errno(EXIT_FAILURE, "Unable to enter background");
 
@@ -706,7 +714,7 @@ static void start_daemon(int lockfd)
 
 		return;
 	}
-
+#endif
 	/* child */
 
 	close(0);
@@ -875,6 +883,7 @@ static void start_daemon(HANDLE lockfd)
 #ifndef WIN32
 static int try_connect(void)
 {
+#ifndef WIN32
 	int	pipefd, ret;
 	struct	sockaddr_un saddr;
 
@@ -893,6 +902,9 @@ static int try_connect(void)
 		return pipefd;
 
 	return -1;
+#else
+	return -1;
+#endif
 }
 #else
 static HANDLE try_connect(void)
@@ -1033,6 +1045,7 @@ static void read_timeout(int sig)
 
 static void setup_sigalrm(void)
 {
+#ifndef WIN32
 	struct  sigaction sa;
 	sigset_t nut_upssched_sigmask;
 
@@ -1041,6 +1054,7 @@ static void setup_sigalrm(void)
 	sa.sa_flags = 0;
 	sa.sa_handler = read_timeout;
 	sigaction(SIGALRM, &sa, NULL);
+#endif
 }
 #endif
 
@@ -1100,11 +1114,13 @@ static void sendcmd(const char *cmd, const char *arg1, const char *arg2)
 		/* ugh - probably should use select here... */
 		setup_sigalrm();
 
+#ifndef WIN32
 		alarm(2);
 		ret = read(pipefd, buf, sizeof(buf));
 		alarm(0);
 
 		signal(SIGALRM, SIG_IGN);
+#endif
 
 		close(pipefd);
 

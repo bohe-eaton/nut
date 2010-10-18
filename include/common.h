@@ -189,6 +189,18 @@ extern int optind;
 /* *INDENT-OFF* */
 }
 /* *INDENT-ON* */
+
+#ifdef WIN32
+/*FIXME*/
+#define LOG_ERR (0)
+#define LOG_INFO (1)
+#define LOG_DEBUG (2)
+#define LOG_NOTICE (3)
+#define LOG_ALERT (4)
+#define LOG_WARNING (5)
+#define LOG_CRIT (5)
+#define LOG_PID (6)
+#define LOG_DAEMON (7)
 #endif
 
 #ifdef WIN32

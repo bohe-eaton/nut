@@ -9,6 +9,11 @@
 #include "wincompat.h"
 #endif
 
+#ifdef WIN32
+#define sleep(a) Sleep(a*1000)
+#define strtok_r(a,b,c) strtok(a,b)
+#endif
+
 /* public functions & variables from main.c */
 extern const char	*progname, *upsname, *device_name;
 extern char		*device_path;

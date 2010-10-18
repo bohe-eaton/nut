@@ -30,6 +30,9 @@
 
 #include "config.h" /* for HAVE_USB_DETACH_KERNEL_DRIVER_NP flag */
 #include "common.h" /* for xmalloc, upsdebugx prototypes */
+#ifdef WIN32
+#undef DATADIR
+#endif
 #include "usb-common.h"
 #include "libusb.h"
 #ifdef WIN32
@@ -113,6 +116,10 @@ static int libusb_open(usb_dev_handle **udevp, USBDevice_t *curDevice, USBDevice
 	usb_init();
 	usb_find_busses();
 	usb_find_devices();
+#ifdef WIN32
+	struct usb_bus *busses;
+	busses = usb_get_busses();
+#endif
 
 #ifndef __linux__ /* SUN_LIBUSB (confirmed to work on Solaris and FreeBSD) */
 	/* Causes a double free corruption in linux if device is detached! */

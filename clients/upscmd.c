@@ -247,7 +247,7 @@ int main(int argc, char **argv)
 	if (!strchr(argv[1], '.')) {
 		fatalx(EXIT_FAILURE, "Error: old command names are not supported");
 	}
-
+#ifndef WIN32
 	if (!have_un) {
 		struct passwd	*pw;
 
@@ -316,7 +316,7 @@ int main(int argc, char **argv)
 	if (upscli_readline(ups, buf, sizeof(buf)) < 0) {
 		fatalx(EXIT_FAILURE, "Set password failed: %s", upscli_strerror(ups));
 	}
-
+#endif
 	do_cmd(&argv[1], argc - 1);
 
 	exit(EXIT_SUCCESS);

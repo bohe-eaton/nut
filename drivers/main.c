@@ -467,6 +467,7 @@ void set_exit_flag(int sig)
 #ifndef WIN32
 static void setup_signals(void)
 {
+#ifndef WIN32 // FIXME
 	struct sigaction	sa;
 
 	sigemptyset(&sa.sa_mask);
@@ -480,6 +481,7 @@ static void setup_signals(void)
 	sa.sa_handler = SIG_IGN;
 	sigaction(SIGHUP, &sa, NULL);
 	sigaction(SIGPIPE, &sa, NULL);
+#endif
 }
 #endif
 

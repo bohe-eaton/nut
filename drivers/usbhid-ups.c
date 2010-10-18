@@ -1271,6 +1271,7 @@ static bool_t hid_ups_walk(walkmode_t mode)
 		case 0:
 			continue;
 
+#ifndef WIN32
 		case -ETIMEDOUT:	/* Connection timed out */
 /* libusb win32 does not know EPROTO and EOVERFLOW, it only returns EIO for any
    IO errors */

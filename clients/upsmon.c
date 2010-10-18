@@ -207,7 +207,7 @@ static void notify(const char *notice, int flags, const char *ntype,
 
 	if (flag_isset(flags, NOTIFY_SYSLOG))
 		upslogx(LOG_NOTICE, "%s", notice);
-
+#ifndef WIN32
 #ifndef WIN32
 	/* fork here so upsmon doesn't get wedged if the notifier is slow */
 	ret = fork();
@@ -219,7 +219,7 @@ static void notify(const char *notice, int flags, const char *ntype,
 
 	if (ret != 0)	/* parent */
 		return;
-
+#endif
 	/* child continues and does all the work */
 
 	if (flag_isset(flags, NOTIFY_WALL))
@@ -541,7 +541,7 @@ static void doshutdown(void)
 		ret = write(pipefd[1], &ch, 1);
 	} else {
 		/* one process model = we do all the work here */
-
+#ifndef WIN32
 #ifndef WIN32
 		if (geteuid() != 0)
 			upslogx(LOG_WARNING, "Not root, shutdown may fail");
@@ -2062,6 +2062,7 @@ int main(int argc, char *argv[])
 
 	while ((i = getopt(argc, argv, "+Dhic:f:pu:VK46")) != -1) {
 		switch (i) {
+#ifndef WIN32
 			case 'c':
 				if (!strncmp(optarg, "fsd", strlen(optarg)))
 					cmd = SIGCMD_FSD;
@@ -2074,6 +2075,7 @@ int main(int argc, char *argv[])
 				if (cmd == 0)
 					help(argv[0]);
 				break;
+#endif
 			case 'D':
 				nut_debug_level++;
 				break;
@@ -2225,6 +2227,7 @@ int main(int argc, char *argv[])
 #ifndef WIN32
 		/* reap children that have exited */
 		waitpid(-1, NULL, WNOHANG);
+#endif
 
 		sleep(sleepval);
 #else
