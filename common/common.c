@@ -462,7 +462,6 @@ static void vupslog(int priority, const char *fmt, va_list va, int use_strerror)
 /* Return the default path for the directory containing configuration files */
 const char * confpath(void)
 {
-#ifndef WIN32
 	const char *path = getenv("NUT_CONFPATH");
 #else
 	static const char *path = NULL;
