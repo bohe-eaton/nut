@@ -719,6 +719,7 @@ void dstate_init(const char *prog, const char *devname)
 	/* upsname (and so devname) is now mandatory so no need to test it */
 	snprintf(sockname, sizeof(sockname), "\\\\.\\pipe\\%s-%s", prog, devname);
 	pipename = strdup(sockname);
+	pipename = strdup(sockname);
 #endif
 
 	sockfd = sock_open(sockname);
