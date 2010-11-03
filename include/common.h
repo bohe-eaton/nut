@@ -74,6 +74,12 @@ typedef struct serial_handler_s {
 #endif
 
 extern const char *UPS_VERSION;
+#ifdef WIN32
+extern int			noservice_flag;
+extern HANDLE			svc_stop;
+extern SERVICE_STATUS		SvcStatus;
+extern SERVICE_STATUS_HANDLE	SvcStatusHandle;
+#endif
 
 /* get the syslog ready for us */
 void open_syslog(const char *progname);
@@ -157,6 +163,12 @@ int select_read(const int fd, void *buf, const size_t buflen, const long d_sec, 
 int select_read(serial_handler_t * fd, void *buf, const size_t buflen, const long d_sec, const long d_usec);
 #endif
 int select_write(const int fd, const void *buf, const size_t buflen, const long d_sec, const long d_usec);
+#ifdef WIN32
+int SvcInstall(const char *);
+int SvcUninstall(const char *);
+void ReportSvcStatus(DWORD,DWORD,DWORD);
+void WINAPI SvcCtrlHandler(DWORD);
+#endif
 
 /* Buffer sizes used for various functions */
 #define SMALLBUF	512
