@@ -162,7 +162,7 @@ int select_read(serial_handler_t * fd, void *buf, const size_t buflen, const lon
 #endif
 int select_write(const int fd, const void *buf, const size_t buflen, const long d_sec, const long d_usec);
 #ifdef WIN32
-int SvcInstall(const char *);
+int SvcInstall(const char *,const char *);
 int SvcUninstall(const char *);
 void ReportSvcStatus(DWORD,DWORD,DWORD);
 void WINAPI SvcCtrlHandler(DWORD);
@@ -214,7 +214,8 @@ extern int optind;
 
 #define closelog()
 
-#define  UPSD_SVCNAME TEXT("NUT data server")
+#define  UPSD_SVCNAME TEXT("NUT - data server")
+#define  SERVICE_PREFIX TEXT("NUT - ")
 #endif
 
 #ifdef WIN32
