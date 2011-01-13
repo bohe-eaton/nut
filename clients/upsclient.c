@@ -42,8 +42,6 @@
 #include <arpa/inet.h>
 #include <fcntl.h>
 #else
-#include <winsock2.h>
-#include <windows.h>
 /* This override network system calls to adapt to Windows specificity */
 #define W32_NETWORK_CALL_OVERRIDE
 #include "wincompat.h"
