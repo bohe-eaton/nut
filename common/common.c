@@ -713,7 +713,7 @@ int select_read(serial_handler_t * fd, void *buf, const size_t buflen, const lon
 	TOut.ReadTotalTimeoutConstant = timeout;
 	SetCommTimeouts(fd->handle,&TOut);
 
-	res = w32_serial_read(fd,buf,buflen,timeout);
+	res = w32_serial_read((serial_handler_t *)fd,buf,buflen,timeout);
 
 	return res;
 }
