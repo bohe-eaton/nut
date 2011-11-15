@@ -32,6 +32,12 @@
 #include "apcsmart.h"
 #include "apcsmart_tabs.h"
 
+#ifndef WIN32
+#define INVALID_HANDLE_VALUE -1
+#else
+#define ECANCELED ERROR_CANCELLED
+#endif
+
 /* driver description structure */
 upsdrv_info_t upsdrv_info = {
 	DRIVER_NAME,
@@ -581,7 +587,7 @@ static int apc_read(char *buf, size_t buflen, int flags)
 static int apc_write(unsigned char code)
 {
 	errno = 0;
-	if (upsfd == -1)
+	if (upsfd == INVALID_HANDLE_VALUE)
 		return 0;
 	return ser_send_char(upsfd, code);
 }
@@ -605,7 +611,7 @@ static int apc_write_long(const char *code)
 	int ret;
 	errno = 0;
 
-	if (upsfd == -1)
+	if (upsfd == INVALID_HANDLE_VALUE)
 		return 0;
 
 	ret = ser_send_char(upsfd, *code);
@@ -628,7 +634,7 @@ static int apc_write_rep(unsigned char code)
 	int ret;
 	errno = 0;
 
-	if (upsfd == -1)
+	if (upsfd == INVALID_HANDLE_VALUE)
 		return 0;
 
 	ret = ser_send_char(upsfd, code);

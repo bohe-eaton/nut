@@ -524,6 +524,7 @@ MAN_MANS = \
 	$(MAN_POWERMAN_PAGES) \
 	$(MAN_IPMIPSU_PAGES) \
 	$(MAN_MACOSX_PAGES)
+	$(MAN_IPMIPSU_PAGES)
 
 # distribute everything, even those not installed by default
 # Note that 'dist' target requires AsciiDoc!
@@ -556,6 +557,7 @@ HTML_MANS = \
 	$(HTML_POWERMAN_MANS) \
 	$(HTML_IPMIPSU_MANS) \
 	$(HTML_MACOSX_MANS)
+	$(HTML_IPMIPSU_MANS)
 
 all:
 
