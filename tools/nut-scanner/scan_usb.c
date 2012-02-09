@@ -276,5 +276,10 @@ nutscan_device_t * nutscan_scan_usb()
 {
 	return NULL;
 }
+#else /* WITH_USB */
+nutscan_device_t * nutscan_scan_usb()
+{
+	return NULL;
+}
 #endif /* WITH_USB */
 
