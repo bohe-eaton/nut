@@ -50,7 +50,7 @@
 #define HAVE_NE_SOCK_CONNECT_TIMEOUT 1
 #endif
 
-#ifdef WIN32 // FIXME ?? skip alarm handling
+#ifdef WIN32 /* FIXME ?? skip alarm handling */
 #define HAVE_NE_SET_CONNECT_TIMEOUT  1
 #define HAVE_NE_SOCK_CONNECT_TIMEOUT 1
 #endif
