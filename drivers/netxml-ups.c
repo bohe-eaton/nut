@@ -40,7 +40,7 @@
 #define DRIVER_NAME	"network XML UPS"
 #define DRIVER_VERSION	"0.31"
 
-#ifdef WIN32 // FIXME ?? skip alarm handling
+#ifdef WIN32 /* FIXME ?? skip alarm handling */
 #define HAVE_NE_SET_CONNECT_TIMEOUT  1
 #define HAVE_NE_SOCK_CONNECT_TIMEOUT 1
 #endif
