@@ -9,6 +9,9 @@ if [ -f $CONFIG ] ; then
         . $CONFIG
 fi
 
+LD_LIBRARY_PATH=$NUT_DIR/lib
+export LD_LIBRARY_PATH
+
 ups_stop () {
 	pkill -n upsmon
 	pkill -n upsd
