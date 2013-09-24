@@ -52,6 +52,9 @@
 	#include "tripplite-hid.h"
 	#include "idowell-hid.h"
 	#include "openups-hid.h"
+#else
+/* This is declared in apc-hid.h */
+extern int max_report_size;
 #endif
 
 /* master list of avaiable subdrivers */
