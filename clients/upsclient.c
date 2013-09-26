@@ -48,7 +48,7 @@
 #define W32_NETWORK_CALL_OVERRIDE
 #include "wincompat.h"
 #undef W32_NETWORK_CALL_OVERRIDE
-#endif 
+#endif
 
 #include "upsclient.h"
 #include "common.h"

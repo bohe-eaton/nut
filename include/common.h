@@ -189,6 +189,7 @@ extern int optind;
 /* *INDENT-OFF* */
 }
 /* *INDENT-ON* */
+#endif
 
 #ifdef WIN32
 /* FIXME : this might not be the optimal mapping between syslog and ReportEvent*/
