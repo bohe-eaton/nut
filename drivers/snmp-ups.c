@@ -71,7 +71,6 @@ static mib2nut_info_t *mib2nut[] = {
 	&eaton_marlin,
 	&pulizzi_switched1,
 	&pulizzi_switched2,
-#ifndef EATON_MODE
 	/*
 	 * Prepend vendor specific MIB mappings before IETF, so that
 	 * if a device supports both IETF and vendor specific MIB,
@@ -79,7 +78,6 @@ static mib2nut_info_t *mib2nut[] = {
 	 */
 	&ietf,
 	/* end of structure. */
-#endif
 	NULL
 };
 
