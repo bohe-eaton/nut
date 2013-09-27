@@ -44,12 +44,12 @@ used with proprietary software. You should consider these very seriously before
 making a choice and using the present SDK.
 
 WARNING: Eaton recommends to use this SDK or the other documented approaches
-only as described in this document or the attached documentation. 
+only as described in this document or the attached documentation.
 Eaton does not warrant completeness, correctness and permanent availability of
 the data and information retrieved by using the SDK (unless required by
 applicable law). Eaton does not assume any liability (unless required by
 applicable law), for damages resulting from the use of the SDK, or data or
-information retrieved by using SDK. 
+information retrieved by using SDK.
 
 Here are some references that may help you understand these limitations and
 constraints: link:http://www.gnu.org/licenses/gpl-faq.html[GPL FAQ].
@@ -68,7 +68,7 @@ WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
 PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License along with
-this program.  If not, see <http://www.gnu.org/licenses/>. 
+this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Complementary information
 -------------------------
@@ -137,7 +137,7 @@ check for updates regularly, so that you can enjoy the latest functionalities.
 Eaton SDK
 =========
 
-NOTE: before using the Eaton SDK, please review secion 2 regarding legal limitations. If in doubt, 
+NOTE: before using the Eaton SDK, please review secion 2 regarding legal limitations. If in doubt,
 chapter 2 references several documents to guide you through the licensing. <<Legal,chapter 2>>.
 
 [[SDK_limitation]]
@@ -146,7 +146,7 @@ Limitation
 
 Using the Eaton SDK library approach, an application can only manage one device!
 If you need to manage more than one device, please contact the Eaton Opensource
-team, or refer to the other possible approaches detailed in other chapters of this 
+team, or refer to the other possible approaches detailed in other chapters of this
 user's guide as shown in the <<_introduction,Introduction>> chapter.
 
 Please, also note that Eaton SDK is not yet Multi thread safe. Thus, you need
@@ -288,19 +288,19 @@ option to the build command lines provided in this document to point to those
 header files.
 
 You may have to link with libeaton shared libraries. To do so the relevant
-libeaton shared library must be available for your compiler. So you have 
+libeaton shared library must be available for your compiler. So you have
 to add the correct "-L <path-to-library>" to the build command lines provided in
 this document to point to those libraries.
 
 Depending the type of connection, you may need additional external libraries
-(net-snmp, neon...) which are described in the relevant chapter. 
+(net-snmp, neon...) which are described in the relevant chapter.
 
 Linux build
 ~~~~~~~~~~~
 
 On Linux, building with the SDK has been tested using GCC. +
 For static link you will need the corresponding ``.a'' file. +
-For dynamic link you will need the corresponding ``.so'' file for compilation 
+For dynamic link you will need the corresponding ``.so'' file for compilation
 and ``.so'', ``.so.0'' and ``.so.0.0.0'' in you libs path for execution.
 
 For dynamic link, you will also need to point the system linker at
@@ -595,7 +595,7 @@ Then you can link it to your application.
 cl test.c -DWIN32 libeaton_usbhid.lib
 --------------------------------------
 
-You need libeaton_usbhid-0.dll, libregex-1.dll and libusb0.dll 
+You need libeaton_usbhid-0.dll, libregex-1.dll and libusb0.dll
 in your path to run the resulting executable.
 
 With MinGW
@@ -1231,7 +1231,7 @@ int main()
 					0x01, /* HID_REPORT_GET */
 					reportId+(0x03<<8), /* HID_REPORT_TYPE_FEATURE */
 					0, buf, 128, /* ask for a large ReportSize */
-					5000); /* 5 seconds timeout */ 
+					5000); /* 5 seconds timeout */
 
 				printf("Received %i bytes\n");
 
