@@ -1045,7 +1045,7 @@ Using the complete NUT framework
 NOTE: This approach does not suffer the limitation of the 'library SDK', as
 presented in the <<SDK_limitation,SDK limitation>> chapter!
 
-The NUT framework basically consists in a server (upsd) connected to drivers
+The link:http://www.networkupstools.org/download.html#_binary_packages[NUT] framework basically consists in a server (upsd) connected to drivers
 (which are themselves connected to device). Once this framework is running,
 clients can access device data and send commands via the upsd server.
 
