@@ -39,7 +39,9 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <fcntl.h>
+#define SOCK_OPT_CAST 
 #else
+#define SOCK_OPT_CAST (char *)
 /* Those 2 files for support of getaddrinfo, getnameinfo and freeaddrinfo
    on Windows 2000 and older versions */
 #include <ws2tcpip.h>
