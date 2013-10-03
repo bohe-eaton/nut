@@ -113,7 +113,6 @@ static void sock_fail(const char *fn)
 	fatalx(EXIT_FAILURE, "Exiting.");
 }
 
-#ifndef WIN32
 static int sock_open(const char *fn)
 {
 	int	ret, fd;
