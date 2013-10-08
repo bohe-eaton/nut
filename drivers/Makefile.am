@@ -298,17 +298,17 @@ libeaton_usbhid_la_SOURCES = mge-hid.c usbhid-ups.c \
  libhid.c libusb.c hidparser.c usb-common.c libeaton.c
 libeaton_usbhid_la_CFLAGS = $(AM_CFLAGS) $(LIBUSB_CFLAGS) -DEATON_MODE
 libeaton_usbhid_la_LIBADD = $(LIBUSB_LIBS) ../common/libcommon.la
-libeaton_usbhid_la_LDFLAGS = -version-info 0:0:0 -no-undefined
+libeaton_usbhid_la_LDFLAGS = -version-info 0:1:0 -no-undefined
 
 libeaton_usbxcp_la_SOURCES = bcmxcp.c usb-common.c libeaton.c bcmxcp_usb.c
 libeaton_usbxcp_la_CFLAGS = $(AM_CFLAGS) $(LIBUSB_CFLAGS)
 libeaton_usbxcp_la_LIBADD = $(LIBUSB_LIBS) ../common/libcommon.la
-libeaton_usbxcp_la_LDFLAGS = -version-info 0:0:0 -no-undefined
+libeaton_usbxcp_la_LDFLAGS = -version-info 0:1:0 -no-undefined
 
 libeaton_usbblazer_la_SOURCES = blazer.c blazer_usb.c libusb.c usb-common.c libeaton.c
 libeaton_usbblazer_la_CFLAGS = $(AM_CFLAGS) $(LIBUSB_CFLAGS)
 libeaton_usbblazer_la_LIBADD = $(LIBUSB_LIBS) ../common/libcommon.la -lm
-libeaton_usbblazer_la_LDFLAGS = -version-info 0:0:0 -no-undefined
+libeaton_usbblazer_la_LDFLAGS = -version-info 0:1:0 -no-undefined
 endif
 
 if WITH_SNMP
@@ -316,14 +316,14 @@ libeaton_snmp_la_SOURCES = snmp-ups.c eaton-mib.c mge-mib.c powerware-mib.c \
 ietf-mib.c libeaton.c bestpower-mib.c
 libeaton_snmp_la_CFLAGS = $(AM_CFLAGS) $(LIBNETSNMP_CFLAGS) -DEATON_MODE
 libeaton_snmp_la_LIBADD = $(LIBNETSNMP_LIBS) ../common/libcommon.la
-libeaton_snmp_la_LDFLAGS = -version-info 0:0:0 -no-undefined
+libeaton_snmp_la_LDFLAGS = -version-info 0:1:0 -no-undefined
 endif
 
 if WITH_NEON
 libeaton_xmlpdc_la_SOURCES = mge-xml.c netxml-ups.c libeaton.c
 libeaton_xmlpdc_la_CFLAGS = $(AM_CFLAGS) $(LIBNEON_CFLAGS)
 libeaton_xmlpdc_la_LIBADD = $(LIBNEON_LIBS) ../common/libcommon.la
-libeaton_xmlpdc_la_LDFLAGS = -version-info 0:0:0 -no-undefined
+libeaton_xmlpdc_la_LDFLAGS = -version-info 0:1:0 -no-undefined
 endif
 
 if WITH_SERIAL
@@ -331,12 +331,12 @@ libeaton_shut_la_SOURCES = usbhid-ups.c libshut.c libhid.c hidparser.c \
 mge-hid.c serial.c libeaton.c
 libeaton_shut_la_CFLAGS = $(AM_CFLAGS) -DSHUT_MODE -DEATON_MODE
 libeaton_shut_la_LIBADD = ../common/libcommon.la
-libeaton_shut_la_LDFLAGS = -version-info 0:0:0 -no-undefined
+libeaton_shut_la_LDFLAGS = -version-info 0:1:0 -no-undefined
 
 libeaton_serialxcp_la_SOURCES = bcmxcp.c bcmxcp_ser.c serial.c libeaton.c
 libeaton_serialxcp_la_CFLAGS = $(AM_CFLAGS)
 libeaton_serialxcp_la_LIBADD = ../common/libcommon.la
-libeaton_serialxcp_la_LDFLAGS = -version-info 0:0:0 -no-undefined
+libeaton_serialxcp_la_LDFLAGS = -version-info 0:1:0 -no-undefined
 endif
 
 endif #EATON_SDK
