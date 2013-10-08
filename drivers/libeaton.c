@@ -85,6 +85,7 @@ struct ups_handler      upsh;
 void upsdrv_initinfo(void);
 void upsdrv_initups(void);
 void upsdrv_updateinfo(void);
+void upsdrv_cleanup(void);
 
 void upsdrv_makevartable(void);
 
