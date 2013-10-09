@@ -347,7 +347,7 @@ Linux build
 On Linux, building with the SDK has been tested using GCC. +
 For static link you will need the corresponding ``.a'' file. +
 For dynamic link you will need the corresponding ``.so'' file for compilation
-and ``.so'', ``.so.0'' and ``.so.0.0.0'' in you libs path for execution.
+and ``.so'', ``.so.0'' and ``.so.0.0.1'' in you libs path for execution.
 
 For dynamic link, you will also need to point the system linker at
 Eaton SDK library. To do so, just use the environment variable
