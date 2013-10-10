@@ -43,12 +43,18 @@
 #include <windows.h>
 #include <ws2tcpip.h>
 #endif
+#ifndef _MSC_VER
 #include <unistd.h>
+#endif
 #include <assert.h>
 
+#ifndef _MSC_VER
 #include "timehead.h"
+#endif
 #include "attribute.h"
+#ifndef _MSC_VER
 #include "proto.h"
+#endif
 
 #ifdef __cplusplus
 /* *INDENT-OFF* */
@@ -164,6 +170,7 @@ int select_write(const int fd, const void *buf, const size_t buflen, const long 
 
 /* Provide declarations for getopt() global variables */
 
+#ifndef _MSC_VER
 #ifdef NEED_GETOPT_H
 #include <getopt.h>
 #else
@@ -172,6 +179,7 @@ extern char *optarg;
 extern int optind;
 #endif /* NEED_GETOPT_DECLS */
 #endif /* HAVE_GETOPT_H */
+#endif /* _MSC_VER */
 
 /* logging flags: bitmask! */
 
