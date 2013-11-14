@@ -38,7 +38,7 @@ typedef struct conn_s {
 static DWORD			upsd_pid = 0;
 static DWORD			upsmon_pid = 0;
 static BOOL			service_flag = TRUE;
-HANDLE				svc_stop = NULL;
+HANDLE				_svc_stop = NULL;
 static SERVICE_STATUS		SvcStatus;
 static SERVICE_STATUS_HANDLE	SvcStatusHandle;
 
@@ -442,7 +442,7 @@ static void WINAPI SvcCtrlHandler( DWORD Ctrl )
 			ReportSvcStatus(SERVICE_STOP_PENDING, NO_ERROR, 0);
 
 			/* Signal the service to stop */
-			SetEvent(svc_stop);
+			SetEvent(_svc_stop);
 			ReportSvcStatus(SvcStatus.dwCurrentState, NO_ERROR, 0);
 
 			return;
@@ -476,13 +476,13 @@ static void SvcStart(char * SvcName)
 
 static void SvcReady(void)
 {
-	svc_stop = CreateEvent(
+	_svc_stop = CreateEvent(
 			NULL,	/* default security attributes */
 			TRUE,	/* manual reset event */
 			FALSE,	/* not signaled */
 			NULL);	/* no name */
 
-	if( svc_stop == NULL ) {
+	if( _svc_stop == NULL ) {
 		ReportSvcStatus( SERVICE_STOPPED, NO_ERROR, 0);
 		return;
 	}
@@ -551,7 +551,7 @@ static void WINAPI SvcMain( DWORD argc, LPTSTR *argv )
 
 		/* Add SCM event handler in service mode*/
 		if(service_flag) {
-			handles[maxhandle] = svc_stop;
+			handles[maxhandle] = _svc_stop;
 			maxhandle++;
 		}
 
@@ -562,7 +562,7 @@ static void WINAPI SvcMain( DWORD argc, LPTSTR *argv )
 			return;
 		}
 
-		if( handles[ret] == svc_stop && service_flag ) {
+		if( handles[ret] == _svc_stop && service_flag ) {
 			parse_nutconf(NUT_STOP);
 			if(service_flag) {
 				print_event(LOG_INFO, "Exiting");

@@ -219,7 +219,7 @@ static void notify(const char *notice, int flags, const char *ntype,
 
 	if (ret != 0)	/* parent */
 		return;
-
+#endif
 	/* child continues and does all the work */
 
 	if (flag_isset(flags, NOTIFY_WALL))
@@ -2062,6 +2062,7 @@ int main(int argc, char *argv[])
 
 	while ((i = getopt(argc, argv, "+Dhic:f:pu:VK46")) != -1) {
 		switch (i) {
+#ifndef WIN32
 			case 'c':
 				if (!strncmp(optarg, "fsd", strlen(optarg)))
 					cmd = SIGCMD_FSD;
@@ -2074,6 +2075,7 @@ int main(int argc, char *argv[])
 				if (cmd == 0)
 					help(argv[0]);
 				break;
+#endif
 			case 'D':
 				nut_debug_level++;
 				break;

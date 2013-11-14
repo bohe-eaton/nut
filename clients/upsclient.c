@@ -1545,6 +1545,9 @@ int upscli_disconnect(UPSCONN_t *ups)
 	ups->host = NULL;
 
 	if (ups->fd < 0) {
+#ifdef WIN32
+		WSACleanup();
+#endif
 		return 0;
 	}
 
@@ -1568,6 +1571,10 @@ int upscli_disconnect(UPSCONN_t *ups)
 
 	close(ups->fd);
 	ups->fd = -1;
+
+#ifdef WIN32
+	WSACleanup();
+#endif
 
 	return 0;
 }

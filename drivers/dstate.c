@@ -59,6 +59,8 @@
 /* this may be a frequent stumbling point for new users, so be verbose here */
 static void sock_fail(const char *fn)
 {
+#ifndef WIN32
+/*FIXME*/
 	int	sockerr;
 	struct passwd	*user;
 
@@ -106,7 +108,7 @@ static void sock_fail(const char *fn)
 	 * there - that wasn't so bad.  every helpful line of code here 
 	 * prevents one more "help me" mail to the list a year from now
 	 */
-
+#endif
 	printf("\n");
 	fatalx(EXIT_FAILURE, "Exiting.");
 }
