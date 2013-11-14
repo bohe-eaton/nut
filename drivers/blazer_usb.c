@@ -43,8 +43,6 @@ upsdrv_info_t upsdrv_info = {
 	{ NULL }
 };
 
-#ifndef TESTING
-
 static usb_communication_subdriver_t *usb = &usb_subdriver;
 static usb_dev_handle		*udev = NULL;
 static USBDevice_t		usbdevice;
@@ -395,7 +393,6 @@ static USBDeviceMatcher_t device_matcher = {
 	NULL
 };
 
-#endif	/* TESTING */
 
 
 /*
@@ -449,7 +446,6 @@ int blazer_command(const char *cmd, char *buf, size_t buflen)
 		usb->close(udev);
 		udev = NULL;
 		break;
-#ifndef WIN32
 	case -ETIMEDOUT:	/* Connection timed out */
 /* libusb win32 does not know EPROTO and EOVERFLOW, it only returns EIO for any
    IO errors */

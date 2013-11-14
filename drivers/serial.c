@@ -79,7 +79,6 @@ static void ser_open_error(const char *port)
 			group->gr_name, (int) fs.st_gid);
 
 #endif
-#endif
 	printf("     Mode of port: %04o\n\n", (int) fs.st_mode & 07777);
 
 	printf("Things to try:\n\n");
@@ -133,7 +132,6 @@ static void lock_set(TYPE_FD fd, const char *port)
 #endif
 }
 
-#ifndef WIN32
 /* Non fatal version of ser_open */
 TYPE_FD ser_open_nf(const char *port)
 {
@@ -189,9 +187,6 @@ int ser_set_speed_nf(TYPE_FD fd, const char *port, speed_t speed)
 	return 0;
 }
 int ser_set_speed(TYPE_FD fd, const char *port, speed_t speed)
-#else
-int ser_set_speed(HANDLE fd, const char *port, speed_t speed)
-#endif
 {
 	int res;
 
@@ -314,12 +309,6 @@ int ser_flush_io(TYPE_FD fd)
 {
 	return tcflush(fd, TCIOFLUSH);
 }
-#else
-int ser_flush_io(HANDLE fd)
-{
-	return FlushFileBuffers(fd);
-}
-#endif
 
 int ser_close(TYPE_FD fd, const char *port)
 {
@@ -336,11 +325,6 @@ int ser_close(TYPE_FD fd, const char *port)
 
 	return 0;
 }
-#else
-int ser_close(HANDLE fd, const char *port)
-{
-	if (fd == INVALID_HANDLE_VALUE)
-		fatal_with_errno(EXIT_FAILURE, "ser_close: programming error: fd=%d port=%s", fd, port);
 
 int ser_send_char(TYPE_FD fd, unsigned char ch)
 {
@@ -397,7 +381,6 @@ int ser_send_buf(TYPE_FD fd, const void *buf, size_t buflen)
 	return ser_send_buf_pace(fd, 0, buf, buflen);
 }
 
-#ifndef WIN32
 /* send buflen bytes from buf with d_usec delay after each char */
 int ser_send_buf_pace(TYPE_FD fd, unsigned long d_usec, const void *buf,
 	size_t buflen)
@@ -419,14 +402,6 @@ int ser_send_buf_pace(TYPE_FD fd, unsigned long d_usec, const void *buf,
 
 	return sent;
 }
-#else
-/* send buflen bytes from buf with d_usec delay after each char */
-int ser_send_buf_pace(HANDLE fd, unsigned long d_usec, const void *buf,
-	size_t buflen)
-{
-	int	ret;
-	DWORD	sent = 0;
-	DWORD	sent_OK;
 
 int ser_get_char(TYPE_FD fd, void *ch, long d_sec, long d_usec)
 {

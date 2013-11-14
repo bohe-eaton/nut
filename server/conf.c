@@ -126,10 +126,7 @@ static void ups_update(const char *fn, const char *name, const char *desc)
 		sstate_infofree(temp);
 		sstate_cmdfree(temp);
 		pconf_finish(&temp->sock_ctx);
-<<<<<<< HEAD
 
-=======
->>>>>>> 9add25e... Initial commit (preliminary investigation)
 #ifndef WIN32
 		close(temp->sock_fd);
 		temp->sock_fd = -1;

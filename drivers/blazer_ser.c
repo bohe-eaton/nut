@@ -114,7 +114,6 @@ void upsdrv_makevartable(void)
 
 void upsdrv_initups(void)
 {
-#ifndef TESTING
 	const struct {
 		const char	*val;
 		const int	dtr;
@@ -130,15 +129,7 @@ void upsdrv_initups(void)
 	int	i;
 
 	const char	*val;
-<<<<<<< HEAD
-
-=======
 #ifndef TESTING
-<<<<<<< HEAD
-#ifndef WIN32 /* TODO : Correctly set the port parameters for WIN32 */
->>>>>>> caf5d58... More work on serial drivers.
-=======
->>>>>>> 1c3900e... First implementation of termios functions
 	struct termios		tio;
 
 	/*

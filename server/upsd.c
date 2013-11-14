@@ -764,9 +764,6 @@ static void mainloop(void)
 	DWORD	ret;
 	pipe_conn_t * conn;
 #endif
-#else
-	DWORD	ret;
-#endif
 
 	upstype_t	*ups;
 	nut_ctype_t		*client, *cnext;
@@ -1134,9 +1131,6 @@ int main(int argc, char **argv)
 	datapath = xstrdup(NUT_DATADIR);
 #else
 	datapath = getfullpath(PATH_SHARE);
-#else
-	datapath = xstrdup("c:");
-#endif
 
 	/* remove trailing .exe */
 	char * drv_name;

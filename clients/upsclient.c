@@ -862,7 +862,6 @@ int upscli_tryconnect(UPSCONN_t *ups, const char *host, int port, int flags,stru
 	HANDLE event = NULL;
 	unsigned long argp;
 
-#ifdef WIN32
 	WSADATA WSAdata;
 	WSAStartup(2,&WSAdata);
 #endif

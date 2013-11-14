@@ -213,23 +213,6 @@ extern int optind;
 #define closelog()
 
 #define SVCNAME TEXT("Network UPS Tools")
-#define EVENTLOG_PIPE_NAME TEXT("\\\\.\\pipe\\nut")
-#endif
-
-#ifdef WIN32
-/* FIXME : this might not be the optimal mapping between syslog and ReportEvent*/
-#define LOG_ERR 	EVENTLOG_ERROR_TYPE
-#define LOG_INFO 	EVENTLOG_INFORMATION_TYPE
-#define LOG_DEBUG	EVENTLOG_WARNING_TYPE
-#define LOG_NOTICE	EVENTLOG_INFORMATION_TYPE
-#define LOG_ALERT	EVENTLOG_ERROR_TYPE
-#define LOG_WARNING	EVENTLOG_WARNING_TYPE
-#define LOG_CRIT	EVENTLOG_ERROR_TYPE
-#define LOG_EMERG	EVENTLOG_ERROR_TYPE
-
-#define closelog()
-
-#define SVCNAME TEXT("Network UPS Tools")
 #define EVENTLOG_PIPE_NAME TEXT("nut")
 #define UPSMON_PIPE_NAME TEXT("upsmon")
 #define UPSD_PIPE_NAME TEXT("upsd")

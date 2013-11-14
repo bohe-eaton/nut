@@ -542,7 +542,6 @@ static void doshutdown(void)
 	} else {
 		/* one process model = we do all the work here */
 #ifndef WIN32
-#ifndef WIN32
 		if (geteuid() != 0)
 			upslogx(LOG_WARNING, "Not root, shutdown may fail");
 #endif
@@ -2227,7 +2226,6 @@ int main(int argc, char *argv[])
 #ifndef WIN32
 		/* reap children that have exited */
 		waitpid(-1, NULL, WNOHANG);
-#endif
 
 		sleep(sleepval);
 #else

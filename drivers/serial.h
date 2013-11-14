@@ -9,19 +9,7 @@
 #if defined(HAVE_SYS_TERMIOS_H)
 #  include <sys/termios.h>      /* for speed_t */
 #else
-#ifndef WIN32
 #  include <termios.h>
-#else
-#define speed_t DWORD
-#define B300 CBR_300
-#define B600 CBR_600
-#define B1200 CBR_1200
-#define B2400 CBR_2400
-#define B4800 CBR_4800
-#define B9600 CBR_9600
-#define B19200 CBR_19200
-#define B38400 CBR_38400
-#endif
 #endif /* HAVE_SYS_TERMIOS_H */
 #else /* WIN32 */
 #include "common.h"
@@ -82,10 +70,6 @@ int ser_send_buf(TYPE_FD fd, const void *buf, size_t buflen);
 /* send buflen bytes from buf with d_usec delay after each char */
 int ser_send_buf_pace(TYPE_FD fd, unsigned long d_usec, const void *buf,
 	size_t buflen);
-#else
-int ser_send_buf_pace(HANDLE fd, unsigned long d_usec, const void *buf, 
-	size_t buflen);
-#endif
 
 int ser_get_char(TYPE_FD fd, void *ch, long d_sec, long d_usec);
 
