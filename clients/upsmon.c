@@ -219,7 +219,7 @@ static void notify(const char *notice, int flags, const char *ntype,
 
 	if (ret != 0)	/* parent */
 		return;
-#endif
+
 	/* child continues and does all the work */
 
 	if (flag_isset(flags, NOTIFY_WALL))
